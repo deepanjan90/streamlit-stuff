@@ -56,7 +56,7 @@ def suggest_clips_with_openai(transcript, api_key, prompt, duration=10):
 
     # Extract suggested clips from the response
     suggested_clips = []
-    print (response.choices[0].message.content)
+    # print (response.choices[0].message.content)
     
     suggested_clips = []
     content = response.choices[0].message.content.replace("**", "")
@@ -131,6 +131,7 @@ if "reset" not in st.session_state:
 
 if st.button("Suggest Clips"):
     if url and api_key and download_path:
+        delete_files(download_path)
         with st.spinner('Fetching transcript and analyzing...'):
             video_id = re.search(r"v=([a-zA-Z0-9_-]+)", url).group(1)
             
@@ -178,5 +179,4 @@ if st.button("Reset"):
 if st.session_state.reset:
     #st.text_area("User Prompt", value=DEFAULT_PROMPT, height=150, key="user_prompt")
     st.session_state.reset = False
-    st.experimental_rerun() 
-    st.session_state.user_prompt = DEFAULT_PROMPT
+    st.rerun() 
