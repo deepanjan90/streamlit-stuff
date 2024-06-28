@@ -92,7 +92,7 @@ def delete_files(path):
     for file in os.listdir(path):
         file_path = os.path.join(path, file)
         try:
-            if os.path.isfile(file_path):
+            if os.path.isfile(file_path) and file_path.endswith('.mp4'):
                 os.unlink(file_path)
         except Exception as e:
             st.error(f"Error deleting file {file_path}: {e}")
